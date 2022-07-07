@@ -64,6 +64,25 @@ class CarController extends Controller<Car> {
         .json({ error: 'Id must have 24 hexadecimal characters' });
     }
   };
+
+  update = async (
+    req: Request<{ id: string }>,
+    res: Response<Car | ResponseError>,
+  ): Promise<typeof res> => {
+    const { body } = req;
+    const { id } = req.params;
+
+    try {
+      const car = await this.service.update(id, body);
+      return car 
+        ? res.status(200).json(car)
+        : res.status(404).json({ error: this.errors.notFound });
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ error: this.errors.internal });
+    }
+  };
 }
 
 export default CarController;
