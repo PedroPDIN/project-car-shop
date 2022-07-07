@@ -28,7 +28,7 @@ abstract class Controller<T> {
     res: Response<T | ResponseError>,
   ): Promise<typeof res>;
 
-  red = async (
+  read = async (
     _req: Request,
     res: Response<T[] | ResponseError>,
   ): Promise<typeof res> => {

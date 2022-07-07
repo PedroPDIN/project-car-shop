@@ -35,6 +35,18 @@ class CarController extends Controller<Car> {
     }
   };
 
+  read = async (
+    _req: Request,
+    res: Response<Car[] | ResponseError>,
+  ): Promise<typeof res> => {
+    try {
+      const cars = await this.service.read();
+      return res.status(200).json(cars);
+    } catch (error) {
+      return res.status(500).json({ error: this.errors.internal });
+    }
+  };
+
   readOne = async (
     req: Request<{ id: string }>,
     res: Response<Car | ResponseError>,
