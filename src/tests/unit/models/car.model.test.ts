@@ -1,4 +1,3 @@
-import { updatedCar } from './../../../../__tests__/utils/CarsMock';
 import sinon, { SinonStub } from'sinon';
 import { expect } from 'chai';
 import mongoose from 'mongoose';

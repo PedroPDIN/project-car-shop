@@ -4,7 +4,7 @@ import Service, { ServiceError } from '.';
 import CarModel from '../models/Car.model';
 
 class CarService extends Service<Car> {
-  constructor(model = new CarModel()) {
+  constructor(public model = new CarModel()) {
     super(model);
   }
 
