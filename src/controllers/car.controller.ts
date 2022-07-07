@@ -52,13 +52,16 @@ class CarController extends Controller<Car> {
     res: Response<Car | ResponseError>,
   ): Promise<typeof res> => {
     const { id } = req.params;
+
     try {
       const car = await this.service.readOne(id);
       return car 
         ? res.status(200).json(car)
         : res.status(404).json({ error: this.errors.notFound });
     } catch (error) {
-      return res.status(500).json({ error: this.errors.internal });
+      return res
+        .status(400)
+        .json({ error: 'Id must have 24 hexadecimal characters' });
     }
   };
 }
