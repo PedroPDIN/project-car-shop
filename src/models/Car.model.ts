@@ -21,3 +21,4 @@ class CarModel extends MongoModel<Car> {
 }
 
 export default CarModel;
+export { carSchema };
