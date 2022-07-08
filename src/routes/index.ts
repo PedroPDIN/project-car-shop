@@ -22,6 +22,7 @@ class CarRouter<T> {
       isValidBodyCar, 
       controller.update,
     );
+    this.router.delete(`${route}/:id`, isValidIdCar, controller.delete);
   }
 }
 

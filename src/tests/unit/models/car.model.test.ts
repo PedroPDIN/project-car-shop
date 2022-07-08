@@ -100,4 +100,30 @@ describe('Car Model', () => {
       );
     });
   });
+
+  describe('Delete car', () => {
+    before(() => {
+      return sinon.stub(mongoose.Model, 'findOneAndDelete').resolves(carOneMock)
+    });
+
+    after(() => {
+      (mongoose.Model.findOneAndDelete as SinonStub).restore();
+    });
+
+    it('Success', async () => {
+      const carModel = new CarModel(mongoose.Model);
+      const updatedCar = await carModel.delete('1');
+
+      expect(updatedCar).to.be.a('object');
+      expect(updatedCar).to.have.all.keys(
+        'model', 
+        'year', 
+        'color', 
+        'status', 
+        'buyValue', 
+        'seatsQty', 
+        'doorsQty'
+      );
+    });
+  });
 })

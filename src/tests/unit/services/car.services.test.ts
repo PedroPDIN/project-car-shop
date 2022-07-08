@@ -95,4 +95,29 @@ describe('Car Service', () => {
       );
     });
   });
+
+  describe('Delete car', () => {
+    before(() => {
+      return sinon.stub(carService.model, 'delete').resolves(carOneMock)
+    });
+
+    after(() => {
+      (carService.model.delete as SinonStub).restore();
+    });
+
+    it('Success', async () => {
+      const updatedCar = await carService.delete('1');
+
+      expect(updatedCar).to.be.a('object');
+      expect(updatedCar).to.have.all.keys(
+        'model', 
+        'year', 
+        'color', 
+        'status', 
+        'buyValue', 
+        'seatsQty', 
+        'doorsQty'
+      );
+    });
+  });
 })
